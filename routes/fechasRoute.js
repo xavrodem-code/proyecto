@@ -10,7 +10,7 @@ router.use(checkAuth);
 router.get("/api/fechas", async (req, res, next) => {
     let fechas;
     try {
-        fechas = await Fecha.find({});
+        fechas = await Fecha.find({}).populate("usuario");
     } 
     catch (err) {
         const error = new Error ("No se pueden mostrar las fechas");
@@ -28,7 +28,7 @@ router.post("/api/fechas", async (req, res, next) => {
     let buscarUsuario;
     let existeFecha;
     try {
-        buscarUsuario = await Usuario.findById(usuario)
+        buscarUsuario = await Usuario.findById(usuario).populate("usuario")
         existeFecha = await Fecha.findOne({fecha:fecha, usuario:usuario});
     } catch(err) {
         const error = new Error(err);
@@ -85,16 +85,31 @@ router.patch("/api/fechas/:id", async (req, res, next) => {
     })
 })
 
-router.delete("/api/fechas/:id", async (req, res, next) => {
+router.delete("/api/fechas/eliminar/:id", async (req, res, next) => {
     let fecha;
     try {
-        fecha = await Fecha.findByIdAndDelete(req.params.id);
+        fecha = await Fecha.findById(req.params.id).populate("usuario");
     } catch (err) {
         const error = new Error("Ha habido un error");
         error.code = 500;
         return next(err);
     }
+   
+    if (!fecha) {
+        const error = new Error("No se ha podido encontrar la fecha");
+        error.code = 404;
+        return next(error);
+    }
 
+    try {
+        await fecha.deleteOne();
+        fecha.usuario.fechas.pull(fecha._id);
+        await fecha.usuario.save();
+    } catch (err) {
+        const error = new Error("Ha ocurrido un error");
+        error.code = 500;
+        return next(err);
+    }
     res.json({
         mensaje: "Fecha borrada",
         fecha: fecha,

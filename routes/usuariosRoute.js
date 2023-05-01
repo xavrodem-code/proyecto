@@ -19,24 +19,7 @@ router.get("/api/usuarios", async (req, res, next) => {
   res.status(200).json({ mensaje: "Todos los usuarios", usuarios: usuarios });
 });
 
-router.get("/api/usuarios/:id", async (req, res, next) => {
-  const idUsuario = req.params.id;
-  let usuario;
-  try {
-    usuario = await Usuario.findById(idUsuario);
-  } catch (err) {
-    const error = new Error("Ha habido un error al encontrar al usuario");
-    error.code = 500;
-    return next(err);
-  }
 
-  if (!usuario) {
-    const error = new Error("No existe ese usuario");
-    error.code = 404;
-    return next(error);
-  }
-  res.json({ mensaje: "Usuario encontrado", usuario: usuario });
-});
 
 router.post("/api/usuarios/signup", async (req, res, next) => {
   const { email, username, password } = req.body;
