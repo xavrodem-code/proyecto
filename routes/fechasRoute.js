@@ -118,4 +118,4 @@ router.delete("/api/fechas/eliminar/:id", async (req, res, next) => {
   });
 });
 
-module.exports = fechasRoute;
+module.exports = router;

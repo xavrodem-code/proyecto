@@ -4,10 +4,10 @@ const bcrypt = require("bcryptjs");
 const checkAuth = require("../middleware/check-auth");
 
 const Usuario = require("../models/usuariosModels");
-const Fecha = require("../models/fechasModels")
+const Fecha = require("../models/fechasModels");
 const jwt = require("jsonwebtoken");
 
-router.get("/api/usuarios", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   let usuarios;
   try {
     usuarios = await Usuario.find({});
@@ -18,8 +18,6 @@ router.get("/api/usuarios", async (req, res, next) => {
   }
   res.status(200).json({ mensaje: "Todos los usuarios", usuarios: usuarios });
 });
-
-
 
 router.post("/api/usuarios/signup", async (req, res, next) => {
   const { email, username, password } = req.body;
@@ -50,7 +48,7 @@ router.post("/api/usuarios/signup", async (req, res, next) => {
       email,
       username,
       password: hashedPassword,
-      fechas: []
+      fechas: [],
     });
     try {
       await nuevoUsuario.save();
@@ -59,7 +57,6 @@ router.post("/api/usuarios/signup", async (req, res, next) => {
       err.code = 500;
       return next(error);
     }
-
 
     res.status(201).json({
       userId: nuevoUsuario.id,
@@ -72,7 +69,7 @@ router.patch("/api/usuarios/:id", async (req, res, next) => {
   let usuario;
   let idUsuario = req.params.id;
   try {
-    console.log("hemos llegado al patch!")
+    console.log("hemos llegado al patch!");
     usuario = await Usuario.findByIdAndUpdate(idUsuario, req.body, {
       new: true,
       runValidators: true,
@@ -150,7 +147,6 @@ router.delete("/api/usuarios/:id", async (req, res, next) => {
     message: "Usuario eliminado",
     usuario: usuario,
   });
-
 });
 
 module.exports = router;
