@@ -5,8 +5,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/", require("./backend/routes/usuariosRoute"));
-app.use("/", require("./backend/routes/fechasRoute"));
+app.use("/", require("./routes/usuariosRoute"));
+app.use("/", require("./routes/fechasRoute"));
 
 app.use((req, res) => {
   res.status(404);
