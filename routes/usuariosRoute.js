@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
   res.status(200).json({ mensaje: "Todos los usuarios", usuarios: usuarios });
 });
 
-router.post("/api/usuarios/signup", async (req, res, next) => {
+router.post("/signup", async (req, res, next) => {
   const { email, username, password } = req.body;
   let existeUsuario;
   try {
@@ -65,7 +65,7 @@ router.post("/api/usuarios/signup", async (req, res, next) => {
   }
 });
 
-router.patch("/api/usuarios/:id", async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   let usuario;
   let idUsuario = req.params.id;
   try {
@@ -86,7 +86,7 @@ router.patch("/api/usuarios/:id", async (req, res, next) => {
   });
 });
 
-router.post("/api/usuarios/login", async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   let usuarioExiste;
   try {
@@ -133,7 +133,8 @@ router.post("/api/usuarios/login", async (req, res, next) => {
 });
 
 router.use(checkAuth);
-router.delete("/api/usuarios/:id", async (req, res, next) => {
+
+router.delete("/:id", async (req, res, next) => {
   const usuarioId = req.params.id;
   let usuario;
   try {

@@ -7,7 +7,7 @@ const Usuario = require("../models/usuariosModels");
 
 router.use(checkAuth);
 
-router.get("/api/fechas", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   let fechas;
   try {
     fechas = await Fecha.find({}).populate("usuario");
@@ -21,7 +21,7 @@ router.get("/api/fechas", async (req, res, next) => {
   });
 });
 
-router.post("/api/fechas", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const { fecha, usuario } = req.body;
   let buscarUsuario;
   let existeFecha;
@@ -67,7 +67,7 @@ router.post("/api/fechas", async (req, res, next) => {
   });
 });
 
-router.patch("/api/fechas/:id", async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   let fecha;
   let idFecha = req.params.id;
   try {
@@ -87,7 +87,7 @@ router.patch("/api/fechas/:id", async (req, res, next) => {
   });
 });
 
-router.delete("/api/fechas/eliminar/:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   let fecha;
   try {
     fecha = await Fecha.findById(req.params.id).populate("usuario");
