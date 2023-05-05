@@ -128,6 +128,7 @@ router.post("/login", async (req, res, next) => {
   res.status(201).json({
     mensaje: "Usuario ha entrado en el sistema con éxito",
     email: usuarioExiste.email,
+    username: usuarioExiste.username,
     idUsuario: usuarioExiste.id,
     token: token,
   });
