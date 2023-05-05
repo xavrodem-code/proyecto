@@ -12,8 +12,8 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cors());
 
-app.use("/api/usuarios/", require("./routes/usuariosRoute"));
-app.use("/api/fechas/", require("./routes/fechasRoute"));
+app.use("/api/usuarios", require("./routes/usuariosRoute"));
+app.use("/api/fechas", require("./routes/fechasRoute"));
 
 app.use((req, res) => {
   res.status(404);
