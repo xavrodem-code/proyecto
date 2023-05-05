@@ -5,7 +5,7 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 const corsOptions = {
-  origin: "https://proyectazo.netlify.app",
+  origin: "https://main--proyectazo.netlify.app",
   optionsSuccessStatus: 200,
 };
 app.use(express.json());
