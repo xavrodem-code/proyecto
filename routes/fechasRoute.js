@@ -25,6 +25,7 @@ router.post("/registrar", async (req, res, next) => {
   const { fecha, usuario } = req.body;
   let buscarUsuario;
   let existeFecha;
+  let nuevaFecha;
   try {
     buscarUsuario = await Usuario.findById(usuario);
     existeFecha = await Fecha.findOne({ fecha: fecha, usuario: usuario });
