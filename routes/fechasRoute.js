@@ -21,7 +21,7 @@ router.get("/", async (req, res, next) => {
   });
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/registrar", async (req, res, next) => {
   const { fecha, usuario } = req.body;
   let buscarUsuario;
   let existeFecha;
