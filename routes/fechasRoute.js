@@ -26,7 +26,7 @@ router.post("/registrar", async (req, res, next) => {
   let buscarUsuario;
   let existeFecha;
   try {
-    buscarUsuario = await Usuario.findById(usuario).populate("usuario");
+    buscarUsuario = await Usuario.findById(usuario);
     existeFecha = await Fecha.findOne({ fecha: fecha, usuario: usuario });
   } catch (err) {
     const error = new Error(err);
