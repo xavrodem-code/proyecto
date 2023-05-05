@@ -5,7 +5,7 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://proyectazo.netlify.app/",
   optionsSuccessStatus: 200,
 };
 app.use(express.json());
