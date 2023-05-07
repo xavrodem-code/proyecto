@@ -130,6 +130,7 @@ router.post("/login", async (req, res, next) => {
     email: usuarioExiste.email,
     username: usuarioExiste.username,
     idUsuario: usuarioExiste.id,
+    fechas: usuarioExiste.fechas,
     token: token,
   });
 });
